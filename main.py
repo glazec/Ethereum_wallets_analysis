@@ -49,10 +49,11 @@ def main():
     #drop the fail or cancelled txn
     token_df = token_df[df['Status'] == 'Confirmed']
     token_df.sort_values(by=['Timestamp'], inplace=True, ascending=False)
+    print(token_df)
 
     # organize into orders
     # orders{startTime,closeTime,buyAmount,Buycurrency,Fiat,Sell,profit,type:success,fail}
-    
+
     #profit or loss
     # need to deduct fees
     balance = {token_name: 0, "ETH": 0}
@@ -87,13 +88,12 @@ def main():
                 pass
             elif txn['Transaction Type'] == 'Send':
                 balance[txn['Sell Currency']]-=float(txn['Sell Amount'])
-                send_receive_balance[txn['Sell Currency']] -= float(txn['Sell Amount'])
-                pass
+                send_receive_balance[txn['Sell Currency']
+                                     ] -= float(txn['Sell Amount'])
             elif txn['Transaction Type'] == 'Receive':
                 balance[txn['Buy Currency']] += float(txn['Buy Amount'])
-                send_receive_balance[txn['Buy Currency']] += float(txn['Buy Amount'])
-
-                pass
+                send_receive_balance[txn['Buy Currency']
+                                     ] += float(txn['Buy Amount'])
             #deal with multi currency and single currency trade
             elif txn['Transaction Type'] == 'Trade':
                 if '\n' in txn['Buy Currency']:
@@ -104,8 +104,8 @@ def main():
                         balance[buy_currency_buffer[i]] += np.negative(float(buy_amount_buffer[i]))
                         trading_size[buy_currency_buffer[i]] += float(buy_amount_buffer[i])
                 else:
-                    balance[txn['Buy Currency']] += (
-                        float(txn['Buy Amount']) if str(txn['Buy Amount']) != 'nan' else 0)
+                    balance[txn['Buy Currency']] = (float(txn['Buy Amount']) if str(
+                        txn['Buy Amount']) != 'nan' else 0)+balance[txn['Buy Currency']]
                 # sell token: the token we sent
                 if '\n' in txn['Sell Currency']:
                     sell_currency_buffer=txn['Sell Currency'].split('\n')
@@ -119,8 +119,8 @@ def main():
                     balance[txn['Sell Currency']] += np.negative(float(txn['Sell Amount']) if str(txn['Sell Amount']) != 'nan' else 0)
                     trading_size[txn['Sell Currency']]+= (float(txn['Sell Amount']) if str(txn['Buy Amount']) != 'nan' else 0)
         #manipulate the balance and fill order detail
-            if balance[token_name] == 0:
-                if send_receive_balance[token_name]!=0:
+            if np.around(balance[token_name], 4) == 0 and txn['Transaction Type'] == 'Trade':
+                if np.around(send_receive_balance[token_name], 4) != 0:
                     order['cheat']=True
                     send_receive_balance = {token_name: 0, "ETH": 0}
                 order['balance'] = balance['ETH']
