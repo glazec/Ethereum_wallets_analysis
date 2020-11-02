@@ -1,0 +1,12 @@
+1. filter swap size, so we can look at order success rate specifically
+2. caculate profit
+3. order success rate
+4. dollar weighted interests rate,time weighted
+5. analyze time zone
+6. history token list
+9. delete a highest loss and profit, avoid outlier
+10. order duration time
+11. token holder number;the  first xxx to swap the token
+12. group by token
+13. build your own portfolio
+14. 5% wort trade, 5% best trade

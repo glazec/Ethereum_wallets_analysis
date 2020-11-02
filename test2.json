@@ -1,0 +1,11 @@
+[
+  // test for multitoken trasaction RELI
+  {
+    "opentime": Timestamp("2020-10-21 20:50:04+0000", (tz = "UTC")),
+    "closetime": Timestamp("2020-10-21 20:52:46+0000", (tz = "UTC")),
+    "currency": "ETH",
+    "balance": -0.0032903210944242867,
+    "token": "RELI",
+    "size": { "RELI": 1184.5340861052953, "ETH": 0.5 }
+  }
+]
