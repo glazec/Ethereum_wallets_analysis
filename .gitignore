@@ -141,3 +141,6 @@ venv/
 data/
 .vscode
 buffer.json
+note
+test.njson
+test2.json
