@@ -138,3 +138,6 @@ dmypy.json
 cython_debug/
 
 venv/
+data/
+.vscode
+buffer.json
