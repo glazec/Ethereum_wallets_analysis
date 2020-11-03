@@ -40,7 +40,7 @@ def analyse_address(address):
     # print(orders_df_sorted['closetime'])
     # past 1 month
     # orders_df_sorted['closetime']=pd.to_datetime(orders_df['closetime']).dt.date
-    analysis_orders(orders_df[0:int(np.round(len(orders_df)*0.25))])
+    analysis_orders(orders_df[0:int(np.round(len(orders_df)*.75))])
 
 
 def analysis_orders(orders_df):
@@ -211,4 +211,4 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         analyse_address(sys.argv[1])
     else:
-        analyse_address('data/ee_zerion.csv')
+        analyse_address('data/test_case_4.csv')
