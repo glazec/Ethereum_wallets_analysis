@@ -5,6 +5,7 @@ import pysnooper
 import datetime
 import matplotlib.pyplot as plt
 import sys
+# weth
 
 
 # @pysnooper.snoop()
@@ -50,7 +51,7 @@ def analysis_orders(orders_df):
         orders_nocheat_df[orders_nocheat_df['balance'] > 0]))
     print('Order Success ration:', cacualte_order_success_rate(orders_nocheat_df))
     print('Net profit:', sum(orders_nocheat_df['balance']))
-    print('Mean profit rate:', np.mean(orders_nocheat_df['pl']))
+    print('Mean profit rate:', np.mean(orders_df[orders_df['pl'] > 0]['pl']))
     print('Median Duration:', np.median(
         orders_nocheat_df['duration']).astype('timedelta64[m]'))
     profit_size_margin = [cacualte_order_success_rate(
@@ -66,7 +67,7 @@ def analysis_orders(orders_df):
         max(orders_nocheat_df['size_eth'])-0.1, step=0.1))
     axs[1].set_title('Size')
     axs[1].set_xlabel('ETH')
-    axs[2].hist([i.hour for i in orders_df['closetime']], bins=np.arange(25))
+    axs[2].hist([i.hour for i in orders_df['closetime']], bins=np.arange(75))
     axs[2].set_xlabel('Time')
     plt.show()
     plt.show()
