@@ -68,7 +68,7 @@ def analysis_orders(orders_df):
         max(orders_nocheat_df['size_eth'])-0.1, step=0.1))
     axs[1].set_title('Size')
     axs[1].set_xlabel('ETH')
-    axs[2].hist([i.hour for i in orders_df['closetime']], bins=np.arange(75))
+    axs[2].hist([i.hour for i in orders_df['closetime']], bins=np.arange(25))
     axs[2].set_xlabel('Time')
     plt.show()
     plt.show()
