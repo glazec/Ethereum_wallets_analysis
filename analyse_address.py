@@ -51,7 +51,8 @@ def analysis_orders(orders_df):
         orders_nocheat_df[orders_nocheat_df['balance'] > 0]))
     print('Order Success ration:', cacualte_order_success_rate(orders_nocheat_df))
     print('Net profit:', sum(orders_nocheat_df['balance']))
-    print('Mean profit rate:', np.mean(orders_df[orders_df['pl'] > 0]['pl']))
+    print('Mean profit rate:', np.mean(
+        orders_nocheat_df[orders_nocheat_df['pl'] > 0]['pl']))
     print('Median Duration:', np.median(
         orders_nocheat_df['duration']).astype('timedelta64[m]'))
     profit_size_margin = [cacualte_order_success_rate(
